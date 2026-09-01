@@ -11,6 +11,8 @@
             --card-bg: #ffffff;
             --text-color: #1e293b;
             --border-color: #e2e8f0;
+            --success-color: #166534;
+            --danger-color: #991b1b;
         }
 
         body {
@@ -63,6 +65,53 @@
             background-color: #1d4ed8;
         }
 
+        .form-cadastro {
+            background-color: #f8fafc;
+            padding: 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 12px;
+            align-items: end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .form-group input {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .btn-cadastrar {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            height: 38px;
+        }
+
+        .btn-cadastrar:hover {
+            background-color: #059669;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -94,12 +143,12 @@
 
         .badge-low {
             background-color: #fee2e2;
-            color: #991b1b;
+            color: var(--danger-color);
         }
 
         .badge-ok {
             background-color: #dcfce7;
-            color: #166534;
+            color: var(--success-color);
         }
     </style>
 </head>
@@ -116,6 +165,23 @@
             </button>
         </header>
 
+        <!-- Formulário para registrar novas roupas -->
+        <div class="form-cadastro">
+            <div class="form-group">
+                <label for="nomeProduto">Nome da Roupa</label>
+                <input type="text" id="nomeProduto" placeholder="Ex: Regata Básica">
+            </div>
+            <div class="form-group">
+                <label for="precoProduto">Preço (R$)</label>
+                <input type="number" step="0.01" id="precoProduto" placeholder="0.00">
+            </div>
+            <div class="form-group">
+                <label for="qtdProduto">Qtd. Estoque</label>
+                <input type="number" id="qtdProduto" placeholder="0">
+            </div>
+            <button class="btn-cadastrar" onclick="adicionarRoupa()">Adicionar</button>
+        </div>
+
         <table>
             <thead>
                 <tr>
@@ -125,7 +191,7 @@
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tabelaEstoque">
                 <tr>
                     <td>Camiseta Básica Algodão (G)</td>
                     <td>R$ 49,90</td>
@@ -155,8 +221,39 @@
     </div>
 
     <script>
+        function adicionarRoupa() {
+            const nome = document.getElementById('nomeProduto').value;
+            const preco = parseFloat(document.getElementById('precoProduto').value);
+            const qtd = parseInt(document.getElementById('qtdProduto').value);
+
+            if (!nome || isNaN(preco) || isNaN(qtd)) {
+                alert("Por favor, preencha todos os campos corretamente!");
+                return;
+            }
+
+            const tabela = document.getElementById('tabelaEstoque');
+            const novaLinha = document.createElement('tr');
+
+            // Define o status automaticamente se o estoque for menor que 5
+            const statusClass = qtd <= 5 ? "badge-low" : "badge-ok";
+            const statusText = qtd <= 5 ? "Baixo Estoque" : "Normal";
+
+            novaLinha.innerHTML = `
+                <td>${nome}</td>
+                <td>R$ ${preco.toFixed(2).replace('.', ',')}</td>
+                <td>${qtd}</td>
+                <td><span class="badge ${statusClass}">${statusText}</span></td>
+            `;
+
+            tabela.appendChild(novaLinha);
+
+            // Limpa os campos após adicionar
+            document.getElementById('nomeProduto').value = '';
+            document.getElementById('precoProduto').value = '';
+            document.getElementById('qtdProduto').value = '';
+        }
+
         function gerarPDF() {
-            // Função mockada (apenas para simular a ideia, como você pediu)
             alert("Ação simulada: O PDF do relatório estaria sendo gerado agora!");
         }
     </script>
