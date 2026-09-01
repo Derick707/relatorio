@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel da Loja Online - Gestão de Estoque</title>
+    <title>Painel da Concessionária - Gestão de Veículos</title>
     <style>
         :root {
-            --primary-color: #4f46e5;
-            --primary-hover: #4338ca;
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-color: #1e293b;
@@ -66,7 +66,7 @@
             background-color: var(--primary-hover);
         }
 
-        /* Área do Formulário de Cadastro */
+        /* Área do Formulário de Cadastro de Veículos */
         .form-cadastro {
             background-color: #f8fafc;
             padding: 20px;
@@ -74,7 +74,7 @@
             border: 1px solid var(--border-color);
             margin-bottom: 24px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) auto;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) auto;
             gap: 12px;
             align-items: end;
         }
@@ -166,12 +166,12 @@
             color: var(--success-color);
         }
 
-        .badge-esgotado {
+        .badge-vendido {
             background-color: #fee2e2;
             color: var(--danger-color);
         }
 
-        .badge-promocao {
+        .badge-reservado {
             background-color: #e0e7ff;
             color: #3730a3;
         }
@@ -273,27 +273,27 @@
     <div class="container">
         <header>
             <div>
-                <h1>Gestão da Loja Online</h1>
-                <p style="margin: 4px 0 0 0; color: #64748b; font-size: 14px;">Controle de Produtos e Relatório de Compras</p>
+                <h1>Gestão de Concessionária / Veículos</h1>
+                <p style="margin: 4px 0 0 0; color: #64748b; font-size: 14px;">Controle de Frota e Relatório de Aquisições</p>
             </div>
             <button class="btn-primary" onclick="abrirRelatorioPrevio()">
                 📥 Gerar Relatório e PDF
             </button>
         </header>
 
-        <!-- Formulário para registrar novos itens -->
+        <!-- Formulário adaptado para carros -->
         <div class="form-cadastro">
             <div class="form-group">
-                <label for="inputModelo">Modelo / Nome</label>
-                <input type="text" id="inputModelo" placeholder="Ex: Jaqueta Jeans">
+                <label for="inputModelo">Modelo do Carro</label>
+                <input type="text" id="inputModelo" placeholder="Ex: Corolla XEI">
             </div>
             <div class="form-group">
                 <label for="inputAno">Ano</label>
-                <input type="number" id="inputAno" placeholder="2026">
+                <input type="number" id="inputAno" placeholder="2024">
             </div>
             <div class="form-group">
                 <label for="inputCor">Cor</label>
-                <input type="text" id="inputCor" placeholder="Azul Escuro">
+                <input type="text" id="inputCor" placeholder="Prata Metalizado">
             </div>
             <div class="form-group">
                 <label for="inputValor">Valor (R$)</label>
@@ -303,18 +303,18 @@
                 <label for="inputSituacao">Situação</label>
                 <select id="inputSituacao">
                     <option value="Disponível">Disponível</option>
-                    <option value="Promoção">Promoção</option>
-                    <option value="Esgotado">Esgotado</option>
+                    <option value="Reservado">Reservado</option>
+                    <option value="Vendido">Vendido</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="inputExtra">Detalhe Extra (Tam/Material)</label>
-                <input type="text" id="inputExtra" placeholder="Tam: G / Algodão">
+                <label for="inputExtra">Detalhe Extra (KM / Motor)</label>
+                <input type="text" id="inputExtra" placeholder="15.000 km / 2.0">
             </div>
-            <button class="btn-cadastrar" onclick="adicionarItem()">Salvar Item</button>
+            <button class="btn-cadastrar" onclick="adicionarCarro()">Salvar Carro</button>
         </div>
 
-        <p class="hint-edit">💡 Dica: Você pode alterar diretamente qualquer dado clicando em cima das células da tabela abaixo, ou excluir itens se precisar arrumar o código/estado.</p>
+        <p class="hint-edit">💡 Dica: Você pode editar qualquer informação diretamente clicando nas células da tabela abaixo, ou excluir veículos se precisar ajustar.</p>
 
         <table>
             <thead>
@@ -324,27 +324,27 @@
                     <th>Cor</th>
                     <th>Valor</th>
                     <th>Situação</th>
-                    <th>Outros (Detalhes)</th>
+                    <th>Outros (KM / Motor)</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody id="tabelaEstoque">
                 <tr>
-                    <td contenteditable="true">Camisa Oversized</td>
-                    <td contenteditable="true">2026</td>
-                    <td contenteditable="true">Preto Fosco</td>
-                    <td contenteditable="true">R$ 89,90</td>
+                    <td contenteditable="true">Honda Civic Touring</td>
+                    <td contenteditable="true">2023</td>
+                    <td contenteditable="true">Branco Perolizado</td>
+                    <td contenteditable="true">R$ 145.000,00</td>
                     <td><span class="badge badge-disponivel">Disponível</span></td>
-                    <td contenteditable="true">Tam: M / 100% Algodão</td>
+                    <td contenteditable="true">28.000 km / 1.5 Turbo</td>
                     <td><button class="btn-excluir" onclick="removerLinha(this)">Excluir</button></td>
                 </tr>
                 <tr>
-                    <td contenteditable="true">Calça Alfaiataria</td>
+                    <td contenteditable="true">Jeep Compass Limited</td>
                     <td contenteditable="true">2025</td>
-                    <td contenteditable="true">Bege Areia</td>
-                    <td contenteditable="true">R$ 159,90</td>
-                    <td><span class="badge badge-promocao">Promoção</span></td>
-                    <td contenteditable="true">Tam: 40 / Linho</td>
+                    <td contenteditable="true">Cinza Sting</td>
+                    <td contenteditable="true">R$ 189.900,00</td>
+                    <td><span class="badge badge-reservado">Reservado</span></td>
+                    <td contenteditable="true">0 km / 2.0 Diesel</td>
                     <td><button class="btn-excluir" onclick="removerLinha(this)">Excluir</button></td>
                 </tr>
             </tbody>
@@ -355,14 +355,14 @@
     <div id="modalRelatorio" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>📋 Relatório de Compras e Estoque</h2>
+                <h2>📋 Relatório de Veículos e Compras</h2>
                 <button class="close-btn" onclick="fecharModal()">&times;</button>
             </div>
             <div class="resumo-box" id="conteudoResumo">
                 <!-- Preenchido via Script -->
             </div>
             <div id="listaRelatorioHtml" style="max-height: 250px; overflow-y: auto;">
-                <!-- Lista detalhada dos itens -->
+                <!-- Lista detalhada dos carros -->
             </div>
             <div class="modal-footer">
                 <button class="btn-secondary" onclick="fecharModal()">Voltar e Ajustar</button>
@@ -372,7 +372,7 @@
     </div>
 
     <script>
-        function adicionarItem() {
+        function adicionarCarro() {
             const modelo = document.getElementById('inputModelo').value;
             const ano = document.getElementById('inputAno').value;
             const cor = document.getElementById('inputCor').value;
@@ -389,14 +389,14 @@
             const novaLinha = document.createElement('tr');
 
             let badgeClass = 'badge-disponivel';
-            if (situacao === 'Esgotado') badgeClass = 'badge-esgotado';
-            if (situacao === 'Promoção') badgeClass = 'badge-promocao';
+            if (situacao === 'Vendido') badgeClass = 'badge-vendido';
+            if (situacao === 'Reservado') badgeClass = 'badge-reservado';
 
             novaLinha.innerHTML = `
                 <td contenteditable="true">${modelo}</td>
                 <td contenteditable="true">${ano}</td>
                 <td contenteditable="true">${cor}</td>
-                <td contenteditable="true">R$ ${valor.toFixed(2).replace('.', ',')}</td>
+                <td contenteditable="true">R$ ${valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</td>
                 <td><span class="badge ${badgeClass}">${situacao}</span></td>
                 <td contenteditable="true">${extra}</td>
                 <td><button class="btn-excluir" onclick="removerLinha(this)">Excluir</button></td>
@@ -419,8 +419,8 @@
 
         function abrirRelatorioPrevio() {
             const linhas = document.querySelectorAll('#tabelaEstoque tr');
-            let totalItens = 0;
-            let valorTotal = 0;
+            let totalCarros = 0;
+            let valorTotalFrota = 0;
             let htmlItens = '<ul style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6;">';
 
             linhas.forEach(linha => {
@@ -429,28 +429,28 @@
                     const modelo = colunas[0].innerText;
                     const ano = colunas[1].innerText;
                     const cor = colunas[2].innerText;
-                    const precoStr = colunas[3].innerText.replace('R$', '').replace('.', '').replace(',', '.').trim();
+                    const precoStr = colunas[3].innerText.replace('R$', '').replaceAll('.', '').replace(',', '.').trim();
                     const situacao = colunas[4].innerText;
                     const extra = colunas[5].innerText;
 
                     const preco = parseFloat(precoStr) || 0;
-                    totalItens++;
-                    valorTotal += preco;
+                    totalCarros++;
+                    valorTotalFrota += preco;
 
-                    htmlItens += `<li><strong>${modelo}</strong> (${ano} - ${cor}) | ${precoStr ? 'R$ ' + preco.toFixed(2).replace('.', ',') : 'R$ 0,00'} | <em>${situacao}</em> | Detalhes: ${extra}</li>`;
+                    htmlItens += `<li><strong>${modelo}</strong> (${ano} - ${cor}) | ${colunas[3].innerText} | <em>${situacao}</em> | Detalhes: ${extra}</li>`;
                 }
             });
 
             htmlItens += '</ul>';
 
             document.getElementById('conteudoResumo').innerHTML = `
-                <p style="margin: 0 0 6px 0;"><strong>Total de produtos listados:</strong> ${totalItens} item(ns)</p>
-                <p style="margin: 0;"><strong>Soma dos valores unitários:</strong> R$ ${valorTotal.toFixed(2).replace('.', ',')}</p>
+                <p style="margin: 0 0 6px 0;"><strong>Total de veículos catalogados:</strong> ${totalCarros} unidade(s)</p>
+                <p style="margin: 0;"><strong>Valor total da frota / aquisição:</strong> R$ ${valorTotalFrota.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
             `;
 
             document.getElementById('listaRelatorioHtml').innerHTML = `
-                <p style="font-weight: 600; font-size: 14px; margin-bottom: 8px; color: #475569;">Resumo do que está sendo catalogado / comprado:</p>
-                ${totalItens > 0 ? htmlItens : '<p style="color: #991b1b; font-size: 14px;">Nenhum produto cadastrado no momento.</p>'}
+                <p style="font-weight: 600; font-size: 14px; margin-bottom: 8px; color: #475569;">Resumo detalhado dos veículos:</p>
+                ${totalCarros > 0 ? htmlItens : '<p style="color: #991b1b; font-size: 14px;">Nenhum veículo cadastrado no momento.</p>'}
             `;
 
             document.getElementById('modalRelatorio').style.display = 'flex';
@@ -461,7 +461,7 @@
         }
 
         function baixarPDFSimulado() {
-            alert("Simulação concluída! O arquivo PDF estruturado com os dados da sua loja online foi gerado com sucesso.");
+            alert("Simulação concluída! O arquivo PDF estruturado com os dados da frota de carros foi gerado com sucesso.");
             fecharModal();
         }
     </script>
