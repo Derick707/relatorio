@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Estoque - Loja de Roupas</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .btn-pdf {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-pdf:hover {
+            background-color: #1d4ed8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-low {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge-ok {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div>
+                <h1>Relatório de Estoque</h1>
+                <p style="margin: 4px 0 0 0; color: #64748b; font-size: 14px;">Loja Vestuário Elegance</p>
+            </div>
+            <button class="btn-pdf" onclick="gerarPDF()">
+                📥 Baixar PDF
+            </button>
+        </header>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Preço Un.</th>
+                    <th>Qtd. em Estoque</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Camiseta Básica Algodão (G)</td>
+                    <td>R$ 49,90</td>
+                    <td>45</td>
+                    <td><span class="badge badge-ok">Normal</span></td>
+                </tr>
+                <tr>
+                    <td>Calça Jeans Skinny (Tam. 38)</td>
+                    <td>R$ 129,90</td>
+                    <td>8</td>
+                    <td><span class="badge badge-low">Baixo Estoque</span></td>
+                </tr>
+                <tr>
+                    <td>Jaqueta de Couro Sintético</td>
+                    <td>R$ 249,90</td>
+                    <td>15</td>
+                    <td><span class="badge badge-ok">Normal</span></td>
+                </tr>
+                <tr>
+                    <td>Vestido Midi Floral</td>
+                    <td>R$ 89,90</td>
+                    <td>3</td>
+                    <td><span class="badge badge-low">Baixo Estoque</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function gerarPDF() {
+            // Função mockada (apenas para simular a ideia, como você pediu)
+            alert("Ação simulada: O PDF do relatório estaria sendo gerado agora!");
+        }
+    </script>
+
+</body>
+</html>
